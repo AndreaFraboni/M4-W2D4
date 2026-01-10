@@ -50,7 +50,7 @@ public class BallShooter : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Ho trovato un ostacolo non sparo !!");
+                    Debug.Log("ho trovato un ostacolo oppure un oggetto che non è il mio obbiettivo !!");
                     return;
                 }
             }
