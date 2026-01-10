@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
+    [Header ("Bullet Settings")]
     [SerializeField] private GameObject _BulletPrefab;
+    [SerializeField] private float _bulletImpulseForce = 10f;
+    [Header("SphereCast Settings")]
     [SerializeField] private float _maxDistance = 100f;
     [SerializeField] private float _radius = 0.005f;
-
+    
     private Camera _cam;
 
     private Ray _ray;
@@ -60,7 +63,7 @@ public class BallShooter : MonoBehaviour
     private void Shoot(Vector3 direction)
     {
         GameObject cloneBullet = Instantiate(_BulletPrefab, transform.position, Quaternion.identity);
-        cloneBullet.gameObject.GetComponent<Bullet>().Shoot(direction);
+        cloneBullet.gameObject.GetComponent<Bullet>().Shoot(direction,_bulletImpulseForce);
     }
 
 }
