@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class ForceShooter : MonoBehaviour
+public class CrackHoleShooter : MonoBehaviour
 {
     [SerializeField] private float _impulseForce = 10f;
     [SerializeField] private float _maxDistance = 100f;
 
     [SerializeField] private LayerMask _targetLayer;
+
+    [SerializeField] GameObject _crackHolePrefab;
 
     private Camera _cam;
     private Ray _ray;
@@ -44,6 +46,14 @@ public class ForceShooter : MonoBehaviour
                 if (hit.collider.attachedRigidbody != null)
                 {
                     _rb = hit.collider.GetComponent<Rigidbody>();
+
+                    GameObject _crackHoleClone = Instantiate(_crackHolePrefab, hit.collider.transform);
+
+                    Vector3 quadPos = new Vector3(hit.point.x, hit.point.y, hit.point.z - 0.01f);
+                    _crackHoleClone.transform.position = quadPos;
+
+                    Quaternion _rotation = Quaternion.LookRotation(-hit.normal);
+                    _crackHoleClone.transform.rotation = _rotation;
 
                     _rb.AddForceAtPosition(direction * _impulseForce, hit.point, ForceMode.Impulse);
                 }
