@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _lifeSpan = 6f;
-    
+
     private Rigidbody _rb;
 
     private Vector3 direction;
@@ -27,7 +26,7 @@ public class Bullet : MonoBehaviour
         _rb.MovePosition(_rb.position + direction * (_speed * Time.deltaTime));
     }
 
-    public void Shoot(Vector3 dir,float impulseforce)
+    public void Shoot(Vector3 dir, float impulseforce)
     {
         direction = dir.normalized;
         _impulseForce = impulseforce;
@@ -35,10 +34,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ( collision.collider.attachedRigidbody != null)
+        if (collision.collider.attachedRigidbody != null)
         {
             collision.collider.attachedRigidbody.AddForce(direction * _impulseForce, ForceMode.Impulse);
         }
     }
-
 }
